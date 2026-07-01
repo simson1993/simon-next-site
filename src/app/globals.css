@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/* Class-based dark mode for next-themes */
+@variant dark (&:where(.dark, .dark *));
+
+/* Romie — purchased font, italic highlights */
+@font-face {
+  font-family: "Romie";
+  src:
+    url("/fonts/Romie-MediumItalic.woff2") format("woff2"),
+    url("/fonts/Romie-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ─────────────────────────────────────── */
+
+@theme inline {
+  /* Fonts */
+  --font-sans: var(--font-inter), sans-serif;
+  --font-display: "Romie", Georgia, serif;
+
+  /* Colors — light */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+}
+
+:root {
+  /* Color */
+  --background: #ffffff;
+  --foreground: #0d0d0d;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+
+  /* Typography */
+  --text-hero: 39px;
+  --leading-hero: 1.15;
+  --tracking-hero: -0.05em;     /* ≈ -2px at 39px */
+
+  --text-body: 16px;
+  --leading-body: 1.6;
+  --tracking-body: 0em;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #f2f2f2;
+  --muted: #9ca3af;
+  --border: #1f2937;
+}
+
+/* ─── Base Styles ───────────────────────────────────────── */
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Romie italic for <em> */
+em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+}
