@@ -1,8 +1,8 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { SunIcon, MoonIcon } from "./icons";
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -20,9 +20,13 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label="Toggle theme"
-      className="fixed top-6 right-6 p-2 rounded-full text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+      className="group absolute top-8 left-1/2 -translate-x-1/2 z-10 flex h-12 w-12 cursor-pointer items-center justify-center text-[var(--text-primary)]"
     >
-      {isDark ? <Sun size={18} /> : <Moon size={18} />}
+      {isDark ? (
+        <MoonIcon />
+      ) : (
+        <SunIcon className="transition-transform duration-500 ease-out group-hover:rotate-90" />
+      )}
     </button>
   );
 }
