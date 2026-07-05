@@ -10,7 +10,7 @@ type Case = {
   title: string;
   description: string;
   image: string;
-  size: "wide" | "tall" | "medium";
+  size: "wide" | "tall" | "medium" | "mediumWide" | "square" | "portrait";
 };
 
 const cases: Case[] = [
@@ -30,16 +30,31 @@ const cases: Case[] = [
     title: "SnapCollect",
     description: "Screenshot App built with AI",
     image: "/cases/snapcollect.jpg",
+    size: "mediumWide",
+  },
+  {
+    title: "Northlight",
+    description: "Digital workplace and intranet design for a consulting firm",
+    image: "/cases/case-4.jpg",
+    size: "square",
+  },
+  {
+    title: "Fieldnotes",
+    description: "Editorial identity and web experience",
+    image: "/cases/case-5.jpg",
     size: "medium",
   },
 ];
 
-/* wide and medium share the same height (487px at max width),
-   tall is narrower and shorter, all bottom-aligned. */
+/* Heights at max width: wide/medium 487px (tallest), square 460px,
+   portrait 450px, tall 440px — varied, none taller than wide. */
 const sizeClasses: Record<Case["size"], string> = {
-  wide: "w-[85vw] max-w-[780px] aspect-[16/10]",
+  wide: "w-[85vw] max-w-[670px] aspect-[670/487]",
   tall: "w-[55vw] max-w-[330px] aspect-[3/4]",
-  medium: "w-[75vw] max-w-[650px] aspect-[4/3]",
+  medium: "w-[70vw] max-w-[480px] aspect-[4/3]",
+  mediumWide: "w-[75vw] max-w-[560px] aspect-[560/487]",
+  square: "w-[45vw] max-w-[260px] aspect-square",
+  portrait: "w-[50vw] max-w-[320px] aspect-square",
 };
 
 export function CasesSlider() {
@@ -98,14 +113,16 @@ export function CasesSlider() {
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
-        className="cases-track flex items-end gap-6 overflow-x-auto px-[max(1.5rem,calc(50vw-30rem))] pt-8 pb-24 -mb-16 cursor-grab active:cursor-grabbing select-none"
+        className="cases-track flex items-end gap-4 overflow-x-auto px-[max(1.5rem,calc(50vw-30rem))] pt-8 pb-24 -mb-16 cursor-grab active:cursor-grabbing select-none"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {cases.map((c) => (
-          <article
+          <motion.article
             key={c.title}
             onClick={() => handleCardClick(c)}
-            className={`relative shrink-0 rounded-2xl overflow-hidden cursor-pointer transition-[transform,box-shadow] duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.025] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] ${sizeClasses[c.size]}`}
+            whileHover={{ scale: 1.025 }}
+            transition={{ type: "spring", stiffness: 350, damping: 14, mass: 0.9 }}
+            className={`relative shrink-0 rounded-2xl overflow-hidden cursor-pointer transition-shadow duration-700 ease-out hover:shadow-[0_32px_64px_-18px_rgba(0,0,0,0.35)] ${sizeClasses[c.size]}`}
           >
             <Image
               src={c.image}
@@ -119,7 +136,7 @@ export function CasesSlider() {
               <h3 className="text-base font-medium text-white">{c.title}</h3>
               <p className="text-sm text-white/70">{c.description}</p>
             </div>
-          </article>
+          </motion.article>
         ))}
       </div>
 

@@ -25,13 +25,12 @@ export function About() {
           </p>
         </FadeIn>
         <FadeIn>
-          <p>
-            Currently experimenting with how <em>artificial</em>
-            <br className="hidden md:block" /> <em>intelligence</em> can extend
-            existing products,
-            <br className="hidden md:block" /> introduce new design workflows,
-            and enable
-            <br className="hidden md:block" /> entirely new creative tools.
+          <p className="mx-auto max-w-[800px]">
+            Right now, I&apos;m exploring what comes next:
+            <br /> how <em>artificial intelligence</em> can extend existing
+            products, reshape design workflows, and
+            <br className="hidden md:block" /> open up entirely new creative
+            tools.
           </p>
         </FadeIn>
       </div>
