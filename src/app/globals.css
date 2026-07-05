@@ -14,58 +14,89 @@
   font-display: swap;
 }
 
-/* ─── Design Tokens ─────────────────────────────────────── */
-
-@theme inline {
-  /* Fonts */
-  --font-sans: var(--font-inter), sans-serif;
-  --font-display: "Romie", Georgia, serif;
-
-  /* Colors — light */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-}
+/* ─── Design Tokens ─────────────────────────────────────────
+   Ink scale: neutral black ramp, ink-0 (white) → ink-950 (near black).
+   Components never use the ramp directly — only semantic tokens below. */
 
 :root {
-  /* Color */
-  --background: #ffffff;
-  --foreground: #0d0d0d;
-  --muted: #6b7280;
-  --border: #e5e7eb;
+  /* Ink ramp */
+  --ink-0: #ffffff;
+  --ink-50: #f7f7f7;
+  --ink-100: #f2f2f2;
+  --ink-200: #d9d9d9;
+  --ink-300: #bfbfbf;
+  --ink-400: #a6a6a6;
+  --ink-500: #8c8c8c;
+  --ink-600: #737373;
+  --ink-700: #595959;
+  --ink-800: #404040;
+  --ink-900: #262626;
+  --ink-950: #0d0d0d;
+
+  /* Semantic — surface */
+  --surface: var(--ink-0);
+  --surface-inverse: var(--ink-950);
+
+  /* Semantic — text (four levels) */
+  --text-primary: var(--ink-950);   /* headings, hero copy */
+  --text-secondary: var(--ink-600); /* bios, supporting body */
+  --text-tertiary: var(--ink-400);  /* section labels, metadata */
+  --text-quaternary: var(--ink-300);/* icons, decorative */
+  --text-inverse: var(--ink-0);
+
+  /* Semantic — border */
+  --border-default: var(--ink-200);
 
   /* Typography */
-  --text-hero: 39px;
-  --leading-hero: 1.15;
-  --tracking-hero: -0.05em;     /* ≈ -2px at 39px */
-
+  --text-hero: clamp(28px, 5vw, 39px);
+  --leading-hero: 1.25;
+  --tracking-hero: -0.05em;
   --text-body: 16px;
   --leading-body: 1.6;
-  --tracking-body: 0em;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #f2f2f2;
-  --muted: #9ca3af;
-  --border: #1f2937;
+  --surface: var(--ink-950);
+  --surface-inverse: var(--ink-0);
+
+  --text-primary: var(--ink-100);
+  --text-secondary: var(--ink-400);
+  --text-tertiary: var(--ink-500);
+  --text-quaternary: var(--ink-600);
+  --text-inverse: var(--ink-950);
+
+  --border-default: var(--ink-800);
 }
 
-/* ─── Base Styles ───────────────────────────────────────── */
+@theme inline {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-display: "Romie", Georgia, serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--surface);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: var(--text-body);
   line-height: var(--leading-body);
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
-/* Romie italic for <em> */
 em {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 500;
+}
+
+/* ─── Cases slider ──────────────────────────────────────── */
+
+.cases-track {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.cases-track::-webkit-scrollbar {
+  display: none;
 }

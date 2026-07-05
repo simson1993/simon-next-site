@@ -23,9 +23,12 @@ src/
     globals.css       # Tailwind v4 import, CSS vars for bg/fg/muted/border
   components/
     ui/
-      ThemeToggle.tsx # Fixed top-right, Sun/Moon, mounted guard
+      ThemeToggle.tsx # Fixed top-center, sun rotates / moon tilts on hover
+      icons.tsx       # SunIcon, MoonIcon (cleaned SVGs)
     sections/
-      Hero.tsx        # Intro text, three paragraphs + location
+      Hero.tsx        # Centered intro, Romie <em> highlights
+      CasesSlider.tsx # Full-bleed horizontal scroll-snap slider
+      About.tsx       # Bio paragraphs, Contact pill, location
   lib/
     utils.ts          # cn() helper
 
@@ -35,18 +38,28 @@ content/
   lab/                # MDX files for experiments
 ```
 
-## CSS Variables
+## Design Tokens
 
-All theme colors go through CSS variables, not Tailwind color utilities:
+Two layers in `globals.css`. Components use ONLY semantic tokens, never the ramp directly.
 
-| Variable | Light | Dark |
-|---|---|---|
-| `--background` | `#ffffff` | `#0a0a0a` |
-| `--foreground` | `#111111` | `#f5f5f5` |
-| `--muted` | `#6b7280` | `#9ca3af` |
-| `--border` | `#e5e7eb` | `#1f2937` |
+**Ink ramp** (neutral black scale): `--ink-0` (#ffffff) → `--ink-950` (#0d0d0d), steps 50/100/200/…/900.
 
-Use as: `text-[var(--muted)]`, `bg-[var(--background)]`, etc.
+**Semantic tokens** (light / dark):
+
+| Token | Use for | Light | Dark |
+|---|---|---|---|
+| `--surface` | Page background | ink-0 | ink-950 |
+| `--surface-inverse` | Buttons, inverted blocks | ink-950 | ink-0 |
+| `--text-primary` | Headings, hero copy | ink-950 | ink-100 |
+| `--text-secondary` | Bios, supporting body | ink-600 | ink-400 |
+| `--text-tertiary` | Labels, metadata, location | ink-400 | ink-500 |
+| `--text-quaternary` | Icons, decorative | ink-300 | ink-600 |
+| `--text-inverse` | Text on surface-inverse | ink-0 | ink-950 |
+| `--border-default` | Dividers | ink-200 | ink-800 |
+
+Typography tokens: `--text-hero` (clamp 28–39px), `--leading-hero` 1.25, `--tracking-hero` -0.05em, `--text-body` 16px.
+
+Fonts: Inter (`--font-sans`, body) + Romie Medium Italic (`--font-display`, applied to all `<em>` — used for highlighted words in copy).
 
 ## Planned Sections (future sessions)
 

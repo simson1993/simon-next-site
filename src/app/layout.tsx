@@ -25,9 +25,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[var(--background)] text-[var(--foreground)]">
+      <body className="min-h-full overflow-x-hidden">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
+          <div className="mx-auto max-w-[960px] px-6 pt-32 pb-4 md:pt-40">
             {children}
           </div>
         </ThemeProvider>
