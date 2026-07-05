@@ -20,8 +20,8 @@ export function FadeIn({
   });
   const opacity = useTransform(
     scrollYProgress,
-    [0, 0.38, 0.5, 0.62, 1],
-    [0.2, 0.3, 1, 0.3, 0.2]
+    [0, 0.28, 0.38, 0.62, 0.72, 1],
+    [0.2, 0.25, 1, 1, 0.25, 0.2]
   );
 
   return (

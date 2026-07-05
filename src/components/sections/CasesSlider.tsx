@@ -98,14 +98,14 @@ export function CasesSlider() {
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
-        className="cases-track flex items-end gap-6 overflow-x-auto px-[max(1.5rem,calc(50vw-30rem))] py-8 cursor-grab active:cursor-grabbing select-none"
+        className="cases-track flex items-end gap-6 overflow-x-auto px-[max(1.5rem,calc(50vw-30rem))] pt-8 pb-24 -mb-16 cursor-grab active:cursor-grabbing select-none"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {cases.map((c) => (
           <article
             key={c.title}
             onClick={() => handleCardClick(c)}
-            className={`relative shrink-0 rounded-2xl overflow-hidden cursor-pointer transition-transform duration-500 ease-out hover:scale-[1.02] ${sizeClasses[c.size]}`}
+            className={`relative shrink-0 rounded-2xl overflow-hidden cursor-pointer transition-[transform,box-shadow] duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.025] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] ${sizeClasses[c.size]}`}
           >
             <Image
               src={c.image}
